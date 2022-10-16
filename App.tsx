@@ -40,6 +40,7 @@ const App = () => {
     [],
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const getKeySnippet = (key: string) => {
     return key.slice(400, 416);
   };
@@ -50,7 +51,6 @@ const App = () => {
     (roomNr: number) => {
       RSA.generateKeys(2056).then(keypair => {
         setMyKeypair(keypair);
-        console.log(getKeySnippet(keypair.public));
         socket.emit('JOIN', roomNr);
       });
     },
@@ -68,19 +68,16 @@ const App = () => {
       'MESSAGE',
       async (message: {text: string; recipient: string; sender: string}) => {
         // Only decrypt messages that were encrypted with the user's public key
-        console.log({message, myKeypair: myKeypair?.public});
         if (message.recipient === myKeypair?.public) {
           // Decrypt the message text in the webworker thread
-          await RSA.decrypt(message.text, myKeypair?.private!).then(text => {
-            console.log(text);
-            setTextItems([
-              ...textItems,
-              {
-                text: text,
-                isMe: false,
-              },
-            ]);
-          });
+          const text = await RSA.decrypt(message.text, myKeypair?.private!);
+          setTextItems([
+            ...textItems,
+            {
+              text: text,
+              isMe: false,
+            },
+          ]);
         }
       },
     );
@@ -107,12 +104,12 @@ const App = () => {
     // Broadcast public key when a new room is joined
     socket.on('ROOM_JOINED', (newRoom: number) => {
       setRoom(newRoom);
-      setServerState(`Joined Room - ${newRoom}`);
+      setServerState('In Chat');
       sendPublicKey();
     });
     // Save public key when received
     socket.on('PUBLIC_KEY', (key: string) => {
-      setServerState(`Public Key Received - ${key.slice(400, 416)}`);
+      setServerState('Partner key received');
       setPartner(key);
     });
     // Clear destination public key if other user leaves room
@@ -213,7 +210,7 @@ const App = () => {
       });
     });
   }, [textItems, textMessage, partner, socket, myKeypair?.public]);
-  
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={backgroundStyle}>
@@ -222,25 +219,13 @@ const App = () => {
           backgroundColor={backgroundStyle.backgroundColor}
         />
         <EnterModal
-          handleRandomRoom={handleJoinRoom}
+          handleRandomRoom={() => handleJoinRoom()}
           handleChooseRoom={(roomNr: number) => handleJoinRoom(roomNr)}
           handleClose={() => setModalVisible(false)}
           modalVisible={modalVisible}
         />
         {room && (
           <View>
-            {!partner && (
-              <View
-                style={{
-                  backgroundColor: '#dedede',
-                  height: '5%',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text>Waiting for partner...</Text>
-              </View>
-            )}
             <View
               style={{
                 backgroundColor: '#0078fe',
@@ -256,6 +241,20 @@ const App = () => {
                   color: '#fff',
                 }}>
                 Room {room} | {serverState}
+              </Text>
+            </View>
+            <View
+              style={{
+                backgroundColor: '#dedede',
+                height: '5%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text>
+                {partner
+                  ? `Partner: ${getKeySnippet(partner)}`
+                  : 'Waiting for partner...'}
               </Text>
             </View>
             <FlatList
