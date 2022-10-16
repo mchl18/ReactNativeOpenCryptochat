@@ -17,17 +17,20 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import io from 'socket.io-client';
 import {KeyPair, RSA} from 'react-native-rsa-native';
 import EnterModal from './components/EnterModal';
-
+const sliceIntoChunks = (arr: string, chunkSize: number) => {
+  const res = [];
+  for (let i = 0; i < arr.length; i += chunkSize) {
+    const chunk = arr.slice(i, i + chunkSize);
+    res.push(chunk);
+  }
+  return res;
+};
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const [modalVisible, setModalVisible] = useState(true);
   const [room, setRoom] = useState<number | null>(null);
   const [partner, setPartner] = useState<string | null>(null);
   const [textMessage, setTextMessage] = useState('');
-  // const [pendingRoom, setPendingRoom] = useState(0);
-  const bottomBarRef = useRef<View>(null);
-  const textInputRef = useRef<TextInput>(null);
-  const flatListRef = useRef<FlatList>(null);
   const [serverState, setServerState] = useState<string>('Loading...');
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -40,7 +43,6 @@ const App = () => {
     [],
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const getKeySnippet = (key: string) => {
     return key.slice(400, 416);
   };
@@ -66,11 +68,18 @@ const App = () => {
   useEffect(() => {
     socket.on(
       'MESSAGE',
-      async (message: {text: string; recipient: string; sender: string}) => {
+      async (message: {text: string[]; recipient: string; sender: string}) => {
         // Only decrypt messages that were encrypted with the user's public key
         if (message.recipient === myKeypair?.public) {
           // Decrypt the message text in the webworker thread
-          const text = await RSA.decrypt(message.text, myKeypair?.private!);
+          console.log(message.text);
+          const text = (
+            await Promise.all(
+              message.text.map(
+                async part => await RSA.decrypt(part, myKeypair.private),
+              ),
+            )
+          ).join('');
           setTextItems([
             ...textItems,
             {
@@ -114,7 +123,7 @@ const App = () => {
     });
     // Clear destination public key if other user leaves room
     socket.on('user disconnected', () => {
-      notify(`User Disconnected - ${(partner || '').slice(400, 416)}`);
+      notify(`User Disconnected - ${getKeySnippet(partner!)}`);
       setPartner(null);
     });
     // Notify user that the room they are attempting to join is full
@@ -135,10 +144,6 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => flatListRef.current?.scrollToEnd(), 500);
-  }, []);
-
   const renderItem = ({
     item,
     index,
@@ -148,18 +153,13 @@ const App = () => {
   }): JSX.Element => {
     return item.isMe ? (
       <View
-        style={{
-          backgroundColor: '#0078fe',
-          padding: 10,
-          marginLeft: '45%',
-          marginBottom: index === textItems.length - 1 ? 35 : 0,
-          marginTop: 5,
-          marginRight: '5%',
-          maxWidth: '50%',
-          alignSelf: 'flex-end',
-          //maxWidth: 500,
-          borderRadius: 20,
-        }}
+        style={[
+          styles.textBubbbleBase,
+          styles.textBubbleRight,
+          {
+            marginBottom: index === textItems.length - 1 ? 35 : 0,
+          },
+        ]}
         key={index}>
         <Text style={{fontSize: 16, color: '#fff'}} key={index}>
           {item.text}
@@ -167,18 +167,13 @@ const App = () => {
       </View>
     ) : (
       <View
-        style={{
-          backgroundColor: '#dedede',
-          padding: 10,
-          marginRight: '45%',
-          marginBottom: index === textItems.length - 1 ? 15 : 0,
-          marginTop: 5,
-          marginLeft: '5%',
-          maxWidth: '50%',
-          alignSelf: 'flex-start',
-          //maxWidth: 500,
-          borderRadius: 20,
-        }}
+        style={[
+          styles.textBubbbleBase,
+          styles.textBubbleLeft,
+          {
+            marginBottom: index === textItems.length - 1 ? 15 : 0,
+          },
+        ]}
         key={index}>
         <Text style={{fontSize: 16, color: '#000'}} key={index}>
           {item.text}
@@ -202,12 +197,16 @@ const App = () => {
       },
     ]);
     setTextMessage('');
-    RSA.encrypt(textMessage, partner!).then(text => {
-      socket.emit('MESSAGE', {
-        text,
-        recipient: partner,
-        sender: myKeypair?.public,
-      });
+    const messageParts = await Promise.all(
+      sliceIntoChunks(textMessage, 245).map(async part => {
+        return await RSA.encrypt(part, partner!);
+      }),
+    );
+    console.log(messageParts)
+    socket.emit('MESSAGE', {
+      text: messageParts,
+      recipient: partner,
+      sender: myKeypair?.public,
     });
   }, [textItems, textMessage, partner, socket, myKeypair?.public]);
 
@@ -226,15 +225,7 @@ const App = () => {
         />
         {room && (
           <View>
-            <View
-              style={{
-                backgroundColor: '#0078fe',
-                height: '5%',
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+            <View style={styles.topBarStatus}>
               <Text
                 style={{
                   textAlign: 'center',
@@ -243,14 +234,7 @@ const App = () => {
                 Room {room} | {serverState}
               </Text>
             </View>
-            <View
-              style={{
-                backgroundColor: '#dedede',
-                height: '5%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+            <View style={styles.topBarPartner}>
               <Text>
                 {partner
                   ? `Partner: ${getKeySnippet(partner)}`
@@ -259,18 +243,14 @@ const App = () => {
             </View>
             <FlatList
               data={textItems}
-              ref={flatListRef}
               renderItem={renderItem}
               style={{height: '83%', marginBottom: 64}}
             />
-            <View
-              style={[styles.bottomBar, backgroundStyle]}
-              ref={bottomBarRef}>
+            <View style={[styles.bottomBar, backgroundStyle]}>
               {!!partner && (
                 <>
                   <TextInput
                     style={styles.input}
-                    ref={textInputRef}
                     onChangeText={e => setTextMessage(e)}
                     value={textMessage}
                   />
@@ -357,6 +337,39 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  textBubbbleBase: {
+    padding: 10,
+    marginTop: 5,
+    maxWidth: '50%',
+    borderRadius: 20,
+  },
+  textBubbleLeft: {
+    backgroundColor: '#dedede',
+    marginRight: '45%',
+    marginLeft: '5%',
+    alignSelf: 'flex-start',
+  },
+  textBubbleRight: {
+    backgroundColor: '#0078fe',
+    marginLeft: '45%',
+    marginRight: '5%',
+    alignSelf: 'flex-end',
+  },
+  topBarStatus: {
+    backgroundColor: '#0078fe',
+    height: '5%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  topBarPartner: {
+    backgroundColor: '#dedede',
+    height: '5%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
