@@ -261,7 +261,7 @@ const App = () => {
               data={textItems}
               ref={flatListRef}
               renderItem={renderItem}
-              style={{height: !partner ? '83%' : '88%', marginBottom: 64}}
+              style={{height: '83%', marginBottom: 64}}
             />
             <View
               style={[styles.bottomBar, backgroundStyle]}
