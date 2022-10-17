@@ -1,11 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {
+  Keyboard,
   Modal,
   Pressable,
   StyleSheet,
   Text,
   TextInput,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 //@ts-ignore
@@ -32,40 +34,43 @@ const EnterModal = ({
       transparent={true}
       visible={modalVisible}
       onRequestClose={handleClose}>
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <Text
-            style={[
-              styles.textStyle,
-              {
-                fontWeight: '700',
-                color: 'black',
-                marginBottom: 12,
-                fontSize: 20,
-              },
-            ]}>
-            Open Cryptochat
-          </Text>
-          <Pressable
-            style={[styles.button, styles.buttonClose, {marginTop: 8}]}
-            onPress={handleRandomRoom}>
-            <Text style={styles.textStyle}>Create Random Room</Text>
-          </Pressable>
-          <Divider orientation="center"> Or </Divider>
-          <Pressable
-            style={[styles.button, styles.buttonClose, {marginTop: 8}]}
-            onPress={() => handleChooseRoom(room!)}>
-            <Text style={styles.textStyle}>Enter Room</Text>
-          </Pressable>
-          <View>
-            <TextInput
-              onChangeText={text => setRoom(+text)}
-              style={[styles.input, {maxHeight: 40, width: 100}]}
-            />
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text
+              style={[
+                styles.textStyle,
+                {
+                  fontWeight: '700',
+                  color: 'black',
+                  marginBottom: 12,
+                  fontSize: 20,
+                },
+              ]}>
+              Open Cryptochat
+            </Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose, {marginTop: 8}]}
+              onPress={handleRandomRoom}>
+              <Text style={styles.textStyle}>Create Random Room</Text>
+            </Pressable>
+            <Divider orientation="center"> Or </Divider>
+            <View>
+              <View>
+                <TextInput
+                  onChangeText={text => setRoom(+text)}
+                  style={[styles.input, {maxHeight: 40, width: 120}]}
+                />
+              </View>
+              <Pressable
+                style={[styles.button, styles.buttonClose, {marginTop: 8}]}
+                onPress={() => handleChooseRoom(room!)}>
+                <Text style={styles.textStyle}>Enter Room</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
-      </View>
-      <View style={{height: 1, backgroundColor: 'black'}} />
+      </TouchableWithoutFeedback>
     </Modal>
   );
 };
@@ -76,6 +81,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 22,
+    backgroundColor: 'whitesmoke',
   },
   modalView: {
     margin: 20,
@@ -108,7 +114,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    margin: 12,
+
     borderWidth: 1,
     padding: 10,
     borderRadius: 99,

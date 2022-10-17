@@ -8,6 +8,7 @@ It relies on the socket.io server provided by OpenCryptoChat in order to connect
 
 ## Getting started
 
-1. check out [React Native Docs](https://reactnative.dev/docs/environment-setup) and set up environment
-2. Install and run [OpenCryptoChat](https://github.com/triestpa/Open-Cryptochat) locally
+1. check out [React Native Docs](https://reactnative.dev/docs/environment-setup) and set up client environment
+2. `cd server && yarn && yarn start`
+3. Open simulator and join room via browser to establish a room session
 
