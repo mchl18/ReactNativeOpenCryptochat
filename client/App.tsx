@@ -29,6 +29,7 @@ interface TransportMessage {
   text: string[];
   recipient: string;
   sender: string;
+  type?: string;
 }
 
 interface ChatMessage {
@@ -61,9 +62,12 @@ const App = () => {
 
   const joinRoom = useCallback(
     (roomNr: number) => {
+      if (room) {
+        socket.emit('USER_DISCONNECTED', myKeypair?.public);
+      }
       socket.emit('JOIN', roomNr);
     },
-    [socket],
+    [myKeypair?.public, room, socket],
   );
   const sendPublicKey = useCallback(async () => {
     const keypair = await RSA.generateKeys(2056);
@@ -154,45 +158,65 @@ const App = () => {
     index: number;
   }): JSX.Element => {
     return item.isMe ? (
-      <View
-        style={[
-          styles.textBubbbleBase,
-          styles.textBubbleRight,
-          item.type === 'image' && styles.textBubbbleImage,
-          {
-            marginBottom: index === textItems.length - 1 ? 35 : 0,
-          },
-        ]}
-        key={index}>
-        <Text style={{fontSize: 16, color: '#fff'}} key={index}>
-          {item.type === 'image' && (
-            <Image
-              source={{
-                uri: item.text,
-                width: 500,
-                height: 400,
-              }}
-              style={{maxWidth: '100%', maxHeight: 200}}
-            />
-          )}
-          {item.type !== 'image' && item.text}
-        </Text>
-      </View>
+      <>
+        <View
+          style={[
+            styles.textBubbbleBase,
+            styles.textBubbleRight,
+            item.type === 'image' && styles.textBubbbleImage,
+          ]}
+          key={index}>
+          <Text style={{fontSize: 16, color: '#fff'}} key={index}>
+            {item.type === 'image' && (
+              <Image
+                source={{
+                  uri: item.text,
+                  width: 500,
+                  height: 400,
+                }}
+                style={{maxWidth: '100%', maxHeight: 200}}
+              />
+            )}
+            {item.type !== 'image' && item.text}
+          </Text>
+        </View>
+        {index === textItems.length - 1 && (
+          <Text
+            style={[
+              styles.userTagSelf,
+              {
+                marginBottom: index === textItems.length - 1 ? 35 : 0,
+              },
+            ]}>
+            You
+          </Text>
+        )}
+      </>
     ) : (
-      <View
-        style={[
-          styles.textBubbbleBase,
-          styles.textBubbleLeft,
-          item.type === 'image' && styles.textBubbbleImage,
-          {
-            marginBottom: index === textItems.length - 1 ? 15 : 0,
-          },
-        ]}
-        key={index}>
-        <Text style={{fontSize: 16, color: '#000'}} key={index}>
-          {item.text}
-        </Text>
-      </View>
+      <>
+        <View
+          style={[
+            styles.textBubbbleBase,
+            styles.textBubbleLeft,
+            item.type === 'image' && styles.textBubbbleImage,
+          ]}
+          key={index}>
+          <Text style={{fontSize: 16, color: '#000'}} key={index}>
+            {item.text}
+          </Text>
+        </View>
+        {index === textItems.length - 1 && (
+          <Text
+            style={[
+              styles.userTagOther,
+              {
+                marginBottom: index === textItems.length - 1 ? 35 : 0,
+              },
+            ]}>
+            {getKeySnippet(partner!)}
+          </Text>
+        )}
+      </>
     );
   };
   const handleJoinRoom = (roomNr?: number) => {
@@ -260,13 +284,63 @@ const App = () => {
             text: messageParts,
             recipient: partner,
             sender: myKeypair?.public,
-            type: 'image'
+            type: 'image',
           });
         } catch {}
       }
     },
     [myKeypair?.public, partner, socket, textItems],
   );
+
+  const imageMenuOpts = [
+    {
+      id: 'image',
+      title: 'Select Image',
+      titleColor: '#46F289',
+      image: Platform.select({
+        ios: 'photo',
+        android: 'ic_photo',
+      }),
+      imageColor: '#000000',
+    },
+  ];
+
+  const SendButtons = () => {
+    return (
+      <View style={styles.buttonContainer}>
+        <MenuView onPressAction={handleImageSend} actions={imageMenuOpts}>
+          <Button
+            icon={<PlusCircleIcon />}
+            buttonStyle={[styles.sendButton, {marginRight: 0}]}
+          />
+        </MenuView>
+        <Button
+          icon={<PaperAirplaneIcon />}
+          buttonStyle={styles.sendButton}
+          onPress={onMessageSend}
+        />
+      </View>
+    );
+  };
+
+  const TopBar = () => (
+    <View style={styles.topBarStatus}>
+      <Button style={styles.w50} onPress={onExit}>
+        Exit
+      </Button>
+      <Text
+        style={{
+          textAlign: 'center',
+          color: '#fff',
+          flex: 1,
+          width: '50%',
+        }}>
+        Room {room} | {serverState}
+      </Text>
+      <View style={styles.w50} />
+    </View>
+  );
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={backgroundStyle}>
@@ -285,21 +359,7 @@ const App = () => {
             onPress={Keyboard.dismiss}
             accessible={false}>
             <View>
-              <View style={styles.topBarStatus}>
-                <Button style={{flex: 1, width: 50}} onPress={onExit}>
-                  Exit
-                </Button>
-                <Text
-                  style={{
-                    textAlign: 'center',
-                    color: '#fff',
-                    flex: 1,
-                    width: '50%',
-                  }}>
-                  Room {room} | {serverState}
-                </Text>
-                <View style={{width: 50}} />
-              </View>
+              <TopBar />
               {!!partner && (
                 <View style={styles.topBarPartner}>
                   <Text>
@@ -323,32 +383,7 @@ const App = () => {
                       value={textMessage}
                     />
 
-                    <View style={styles.sendButtonContainer}>
-                      <MenuView
-                        onPressAction={handleImageSend}
-                        actions={[
-                          {
-                            id: 'image',
-                            title: 'Select Image',
-                            titleColor: '#46F289',
-                            image: Platform.select({
-                              ios: 'photo',
-                              android: 'ic_photo',
-                            }),
-                            imageColor: '#000000',
-                          },
-                        ]}>
-                        <Button
-                          icon={<PlusCircleIcon />}
-                          buttonStyle={[styles.sendButton, {marginRight: 0}]}
-                        />
-                      </MenuView>
-                      <Button
-                        icon={<PaperAirplaneIcon />}
-                        buttonStyle={styles.sendButton}
-                        onPress={onMessageSend}
-                      />
-                    </View>
+                    <SendButtons />
                   </>
                 )}
               </View>
@@ -361,7 +396,8 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
-  sendButtonContainer: {
+  w50: {width: 50},
+  buttonContainer: {
     marginRight: 16,
     display: 'flex',
     flexDirection: 'row',
@@ -464,6 +500,20 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  userTagSelf: {
+    marginLeft: '45%',
+    marginRight: '5%',
+    alignSelf: 'flex-end',
+    marginTop: 8,
+    fontSize: 12,
+  },
+  userTagOther: {
+    marginRight: '45%',
+    marginLeft: '5%',
+    alignSelf: 'flex-start',
+    marginTop: 8,
+    fontSize: 12,
   },
 });
 

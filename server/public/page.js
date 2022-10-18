@@ -60,13 +60,11 @@ const vm = new Vue({
           const text = (
             await Promise.all(
               message.text.map(
-                async part => await this.getWebWorkerResponse(
-                  "decrypt",
-                  part
-                ),
-              ),
+                async (part) => await this.getWebWorkerResponse("decrypt", part)
+              )
             )
-          ).join('');
+          ).join("");
+          // message.text = decryptedAesData;
           message.text = text;
           this.messages.push(message);
         }
@@ -80,6 +78,7 @@ const vm = new Vue({
 
       // Broadcast public key when a new room is joined
       this.socket.on("ROOM_JOINED", (newRoom) => {
+        this.socket.emit("USER_DISCONNECTED", this.currentRoom);
         this.currentRoom = newRoom;
         this.addNotification(`Joined Room - ${this.currentRoom}`);
         this.sendPublicKey();
@@ -94,7 +93,7 @@ const vm = new Vue({
       });
 
       // Clear destination public key if other user leaves room
-      this.socket.on("user disconnected", () => {
+      this.socket.on("USER_DISCONNECTED", () => {
         this.notify(
           `User Disconnected - ${this.getKeySnippet(this.destinationKey)}`
         );
