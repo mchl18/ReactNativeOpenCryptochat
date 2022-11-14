@@ -3,17 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* ReactNativeOpenCryptoChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ReactNativeOpenCryptoChatTests.m */; };
-		0C80B921A6F3F58F76C31292 /* libPods-ReactNativeOpenCryptoChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-ReactNativeOpenCryptoChat.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		7699B88040F8A987B510C191 /* libPods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.a */; };
+		17F6C4E3743F170BC4C87673 /* libPods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49659251C10F71DC7E9CD307 /* libPods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		9B91CA94500413807AE16C6C /* libPods-ReactNativeOpenCryptoChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10B9EE8523FC2EE24F68A6EB /* libPods-ReactNativeOpenCryptoChat.a */; };
+		AB378B602922DD9A0047E65F /* OpenSSL.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB378B5F2922DD9A0047E65F /* OpenSSL.xcframework */; };
+		AB378B622922DE200047E65F /* libDoubleConversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB378B612922DE200047E65F /* libDoubleConversion.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,19 +32,22 @@
 		00E356EE1AD99517003FC87E /* ReactNativeOpenCryptoChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactNativeOpenCryptoChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* ReactNativeOpenCryptoChatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReactNativeOpenCryptoChatTests.m; sourceTree = "<group>"; };
+		10B9EE8523FC2EE24F68A6EB /* libPods-ReactNativeOpenCryptoChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeOpenCryptoChat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* ReactNativeOpenCryptoChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactNativeOpenCryptoChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ReactNativeOpenCryptoChat/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = ReactNativeOpenCryptoChat/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ReactNativeOpenCryptoChat/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ReactNativeOpenCryptoChat/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ReactNativeOpenCryptoChat/main.m; sourceTree = "<group>"; };
-		19F6CBCC0A4E27FBF8BF4A61 /* libPods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B4392A12AC88292D35C810B /* Pods-ReactNativeOpenCryptoChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeOpenCryptoChat.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeOpenCryptoChat/Pods-ReactNativeOpenCryptoChat.debug.xcconfig"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-ReactNativeOpenCryptoChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeOpenCryptoChat.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeOpenCryptoChat/Pods-ReactNativeOpenCryptoChat.release.xcconfig"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-ReactNativeOpenCryptoChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeOpenCryptoChat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49659251C10F71DC7E9CD307 /* libPods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A42B2A7638F9E63C388D708 /* Pods-ReactNativeOpenCryptoChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeOpenCryptoChat.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeOpenCryptoChat/Pods-ReactNativeOpenCryptoChat.release.xcconfig"; sourceTree = "<group>"; };
+		57DE03721D4156C8A4B8947E /* Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.release.xcconfig"; sourceTree = "<group>"; };
+		7423B62B33220D947D031F02 /* Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.debug.xcconfig"; sourceTree = "<group>"; };
+		75C60EC859FA91DD71C40805 /* Pods-ReactNativeOpenCryptoChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeOpenCryptoChat.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeOpenCryptoChat/Pods-ReactNativeOpenCryptoChat.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ReactNativeOpenCryptoChat/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.release.xcconfig"; sourceTree = "<group>"; };
+		AB378B5F2922DD9A0047E65F /* OpenSSL.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OpenSSL.xcframework; path = "Pods/OpenSSL-Universal/Frameworks/OpenSSL.xcframework"; sourceTree = "<group>"; };
+		AB378B612922DE200047E65F /* libDoubleConversion.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libDoubleConversion.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB378B632922DEF60047E65F /* libDoubleConversion.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libDoubleConversion.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -51,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7699B88040F8A987B510C191 /* libPods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.a in Frameworks */,
+				17F6C4E3743F170BC4C87673 /* libPods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +64,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-ReactNativeOpenCryptoChat.a in Frameworks */,
+				AB378B622922DE200047E65F /* libDoubleConversion.a in Frameworks */,
+				AB378B602922DD9A0047E65F /* OpenSSL.xcframework in Frameworks */,
+				9B91CA94500413807AE16C6C /* libPods-ReactNativeOpenCryptoChat.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,9 +106,12 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AB378B632922DEF60047E65F /* libDoubleConversion.a */,
+				AB378B612922DE200047E65F /* libDoubleConversion.a */,
+				AB378B5F2922DD9A0047E65F /* OpenSSL.xcframework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-ReactNativeOpenCryptoChat.a */,
-				19F6CBCC0A4E27FBF8BF4A61 /* libPods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.a */,
+				10B9EE8523FC2EE24F68A6EB /* libPods-ReactNativeOpenCryptoChat.a */,
+				49659251C10F71DC7E9CD307 /* libPods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -140,10 +150,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-ReactNativeOpenCryptoChat.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-ReactNativeOpenCryptoChat.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.release.xcconfig */,
+				75C60EC859FA91DD71C40805 /* Pods-ReactNativeOpenCryptoChat.debug.xcconfig */,
+				4A42B2A7638F9E63C388D708 /* Pods-ReactNativeOpenCryptoChat.release.xcconfig */,
+				7423B62B33220D947D031F02 /* Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.debug.xcconfig */,
+				57DE03721D4156C8A4B8947E /* Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -155,12 +165,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "ReactNativeOpenCryptoChatTests" */;
 			buildPhases = (
-				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
+				783C87053FA7744A76A54D41 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */,
-				F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */,
+				B6C3EF28015AC16CB6C87566 /* [CP] Embed Pods Frameworks */,
+				0B078B0009683E99E6E5A164 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -176,14 +186,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "ReactNativeOpenCryptoChat" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				7F60F34C9311C611B1D03F3D /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				E8526630CBF1892A6A1CA093 /* [CP] Embed Pods Frameworks */,
+				2C88CE5E91FE53BFE6978E74 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -200,7 +210,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
@@ -212,7 +222,7 @@
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "ReactNativeOpenCryptoChat" */;
-			compatibilityVersion = "Xcode 12.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -266,24 +276,41 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
+		0B078B0009683E99E6E5A164 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat/Pods-ReactNativeOpenCryptoChat-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat/Pods-ReactNativeOpenCryptoChat-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat/Pods-ReactNativeOpenCryptoChat-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
+		2C88CE5E91FE53BFE6978E74 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat/Pods-ReactNativeOpenCryptoChat-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat/Pods-ReactNativeOpenCryptoChat-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat/Pods-ReactNativeOpenCryptoChat-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		783C87053FA7744A76A54D41 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -305,7 +332,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		7F60F34C9311C611B1D03F3D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -327,7 +354,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */ = {
+		B6C3EF28015AC16CB6C87566 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -344,38 +371,21 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
+		E8526630CBF1892A6A1CA093 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat/Pods-ReactNativeOpenCryptoChat-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat/Pods-ReactNativeOpenCryptoChat-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat/Pods-ReactNativeOpenCryptoChat-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat/Pods-ReactNativeOpenCryptoChat-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat/Pods-ReactNativeOpenCryptoChat-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests/Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactNativeOpenCryptoChat/Pods-ReactNativeOpenCryptoChat-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -430,15 +440,16 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.debug.xcconfig */;
+			baseConfigurationReference = 7423B62B33220D947D031F02 /* Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = ReactNativeOpenCryptoChatTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -457,12 +468,13 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.release.xcconfig */;
+			baseConfigurationReference = 57DE03721D4156C8A4B8947E /* Pods-ReactNativeOpenCryptoChat-ReactNativeOpenCryptoChatTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = ReactNativeOpenCryptoChatTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -481,13 +493,16 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-ReactNativeOpenCryptoChat.debug.xcconfig */;
+			baseConfigurationReference = 75C60EC859FA91DD71C40805 /* Pods-ReactNativeOpenCryptoChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ECFBYNL846;
 				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = ReactNativeOpenCryptoChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -507,12 +522,15 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-ReactNativeOpenCryptoChat.release.xcconfig */;
+			baseConfigurationReference = 4A42B2A7638F9E63C388D708 /* Pods-ReactNativeOpenCryptoChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ECFBYNL846;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = ReactNativeOpenCryptoChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -578,7 +596,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -643,7 +661,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
