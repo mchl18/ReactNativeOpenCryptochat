@@ -12,6 +12,7 @@ import {
   Keyboard,
   Image,
   Platform,
+  KeyboardAvoidingView,
 } from 'react-native';
 import SafeAreaView, {SafeAreaProvider} from 'react-native-safe-area-view';
 import {Button} from '@rneui/base';
@@ -24,6 +25,10 @@ import EnterModal from './components/EnterModal';
 import {getKeySnippet, sliceIntoChunks} from './util/helpers';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {MenuView} from '@react-native-menu/menu';
+
+const SERVER_URLS = [
+  {name: 'localhost', value: 'https://cryptochat-server.herokuapp.com'},
+];
 
 interface TransportMessage {
   text: string[];
@@ -48,10 +53,11 @@ const App = () => {
   const [textMessage, setTextMessage] = useState('');
   const [serverState, setServerState] = useState<string>('Loading...');
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: Colors.lighter,
+    flex: 1,
   };
   const socket = useRef(
-    io('http://localhost:3000', {transports: ['websocket']}),
+    io(SERVER_URLS[0].value, {transports: ['websocket']}),
   ).current;
   const [myKeypair, setMyKeypair] = useState<null | KeyPair>(null);
   const [textItems, setTextItems] = useState<ChatMessage[]>([]);
@@ -219,12 +225,15 @@ const App = () => {
       </>
     );
   };
-  const handleJoinRoom = (roomNr?: number) => {
-    setModalVisible(false);
-    const chosenNr = roomNr ? roomNr : Math.floor(Math.random() * 1000);
-    setRoom(chosenNr);
-    joinRoom(chosenNr);
-  };
+  const handleJoinRoom = useCallback(
+    (roomNr?: number) => {
+      setModalVisible(false);
+      const chosenNr = roomNr ? roomNr : Math.floor(Math.random() * 1000);
+      setRoom(chosenNr);
+      joinRoom(chosenNr);
+    },
+    [joinRoom],
+  );
 
   const onMessageSend = useCallback(async () => {
     setTextItems([
@@ -358,36 +367,40 @@ const App = () => {
           <TouchableWithoutFeedback
             onPress={Keyboard.dismiss}
             accessible={false}>
-            <View>
-              <TopBar />
-              {!!partner && (
-                <View style={styles.topBarPartner}>
-                  <Text>
-                    {partner
-                      ? `Partner: ${getKeySnippet(partner)}`
-                      : 'Waiting for partner...'}
-                  </Text>
-                </View>
-              )}
-              <FlatList
-                data={textItems}
-                renderItem={renderItem}
-                style={{height: partner ? '83%' : '88%', marginBottom: 64}}
-              />
-              <View style={[styles.bottomBar, backgroundStyle]}>
+            <KeyboardAvoidingView
+              behavior={'padding'}
+              style={styles.safeAreaView}>
+              <View style={{flex: 1}}>
+                <TopBar />
                 {!!partner && (
-                  <>
-                    <TextInput
-                      style={styles.input}
-                      onChangeText={e => setTextMessage(e)}
-                      value={textMessage}
-                    />
-
-                    <SendButtons />
-                  </>
+                  <View style={styles.topBarPartner}>
+                    <Text>
+                      {partner
+                        ? `Partner: ${getKeySnippet(partner)}`
+                        : 'Waiting for partner...'}
+                    </Text>
+                  </View>
                 )}
+                <FlatList
+                  data={textItems}
+                  renderItem={renderItem}
+                  style={{flexGrow: 1}}
+                />
+                <View style={[styles.bottomBar, backgroundStyle]}>
+                  {!!partner && (
+                    <>
+                      <TextInput
+                        style={styles.input}
+                        onChangeText={e => setTextMessage(e)}
+                        value={textMessage}
+                      />
+
+                      <SendButtons />
+                    </>
+                  )}
+                </View>
               </View>
-            </View>
+            </KeyboardAvoidingView>
           </TouchableWithoutFeedback>
         )}
       </SafeAreaView>
@@ -488,15 +501,16 @@ const styles = StyleSheet.create({
   },
   topBarStatus: {
     backgroundColor: '#0078fe',
-    height: '5%',
+    height: 42,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    width: '100%'
   },
   topBarPartner: {
     backgroundColor: '#dedede',
-    height: '5%',
+    height: 42,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -514,6 +528,12 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginTop: 8,
     fontSize: 12,
+  },
+  safeAreaView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
   },
 });
 
